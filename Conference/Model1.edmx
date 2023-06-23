@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище testDEModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Goroda">
+          <Key>
+            <PropertyRef Name="IdGoroda" />
+          </Key>
+          <Property Name="IdGoroda" Type="int" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Napravleniya">
+          <Key>
+            <PropertyRef Name="IdNapravleniya" />
+          </Key>
+          <Property Name="IdNapravleniya" Type="int" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pol">
+          <Key>
+            <PropertyRef Name="IdPola" />
+          </Key>
+          <Property Name="IdPola" Type="int" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Polsovateli">
+          <Key>
+            <PropertyRef Name="IdPolzovatelya" />
+          </Key>
+          <Property Name="IdPolzovatelya" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Familiya" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Imya" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Otchestvo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Telefon" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="DataRojdeniya" Type="date" Nullable="false" />
+          <Property Name="IdPola" Type="int" Nullable="false" />
+          <Property Name="IdStrani" Type="int" Nullable="false" />
+          <Property Name="IdNapravleniya" Type="int" />
+          <Property Name="IdMeropriyatiya" Type="int" />
+          <Property Name="Parol" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="IdRoli" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roli">
+          <Key>
+            <PropertyRef Name="IdRoli" />
+          </Key>
+          <Property Name="IdRoli" Type="int" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sobitiya">
+          <Key>
+            <PropertyRef Name="IdSobitiya" />
+          </Key>
+          <Property Name="IdSobitiya" Type="int" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Data" Type="date" Nullable="false" />
+          <Property Name="Days" Type="int" Nullable="false" />
+          <Property Name="IdGoroda" Type="int" />
+        </EntityType>
+        <EntityType Name="Strani">
+          <Key>
+            <PropertyRef Name="IdStrani" />
+          </Key>
+          <Property Name="IdStrani" Type="int" Nullable="false" />
+          <Property Name="Nazvanie" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Polsovateli_Napravleniya">
+          <End Role="Napravleniya" Type="Self.Napravleniya" Multiplicity="0..1" />
+          <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Napravleniya">
+              <PropertyRef Name="IdNapravleniya" />
+            </Principal>
+            <Dependent Role="Polsovateli">
+              <PropertyRef Name="IdNapravleniya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polsovateli_Pol">
+          <End Role="Pol" Type="Self.Pol" Multiplicity="1" />
+          <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pol">
+              <PropertyRef Name="IdPola" />
+            </Principal>
+            <Dependent Role="Polsovateli">
+              <PropertyRef Name="IdPola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polsovateli_Roli">
+          <End Role="Roli" Type="Self.Roli" Multiplicity="1" />
+          <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roli">
+              <PropertyRef Name="IdRoli" />
+            </Principal>
+            <Dependent Role="Polsovateli">
+              <PropertyRef Name="IdRoli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polsovateli_Sobitiya">
+          <End Role="Sobitiya" Type="Self.Sobitiya" Multiplicity="0..1" />
+          <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sobitiya">
+              <PropertyRef Name="IdSobitiya" />
+            </Principal>
+            <Dependent Role="Polsovateli">
+              <PropertyRef Name="IdMeropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polsovateli_Strani">
+          <End Role="Strani" Type="Self.Strani" Multiplicity="1" />
+          <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Strani">
+              <PropertyRef Name="IdStrani" />
+            </Principal>
+            <Dependent Role="Polsovateli">
+              <PropertyRef Name="IdStrani" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sobitiya_Goroda">
+          <End Role="Goroda" Type="Self.Goroda" Multiplicity="0..1" />
+          <End Role="Sobitiya" Type="Self.Sobitiya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goroda">
+              <PropertyRef Name="IdGoroda" />
+            </Principal>
+            <Dependent Role="Sobitiya">
+              <PropertyRef Name="IdGoroda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище testDEModelContainer">
+          <EntitySet Name="Goroda" EntityType="Self.Goroda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Napravleniya" EntityType="Self.Napravleniya" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pol" EntityType="Self.Pol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Polsovateli" EntityType="Self.Polsovateli" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roli" EntityType="Self.Roli" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sobitiya" EntityType="Self.Sobitiya" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Strani" EntityType="Self.Strani" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Polsovateli_Napravleniya" Association="Self.FK_Polsovateli_Napravleniya">
+            <End Role="Napravleniya" EntitySet="Napravleniya" />
+            <End Role="Polsovateli" EntitySet="Polsovateli" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polsovateli_Pol" Association="Self.FK_Polsovateli_Pol">
+            <End Role="Pol" EntitySet="Pol" />
+            <End Role="Polsovateli" EntitySet="Polsovateli" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polsovateli_Roli" Association="Self.FK_Polsovateli_Roli">
+            <End Role="Roli" EntitySet="Roli" />
+            <End Role="Polsovateli" EntitySet="Polsovateli" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polsovateli_Sobitiya" Association="Self.FK_Polsovateli_Sobitiya">
+            <End Role="Sobitiya" EntitySet="Sobitiya" />
+            <End Role="Polsovateli" EntitySet="Polsovateli" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polsovateli_Strani" Association="Self.FK_Polsovateli_Strani">
+            <End Role="Strani" EntitySet="Strani" />
+            <End Role="Polsovateli" EntitySet="Polsovateli" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sobitiya_Goroda" Association="Self.FK_Sobitiya_Goroda">
+            <End Role="Goroda" EntitySet="Goroda" />
+            <End Role="Sobitiya" EntitySet="Sobitiya" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="testDEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Goroda">
+          <Key>
+            <PropertyRef Name="IdGoroda" />
+          </Key>
+          <Property Name="IdGoroda" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sobitiya" Relationship="Self.FK_Sobitiya_Goroda" FromRole="Goroda" ToRole="Sobitiya" />
+        </EntityType>
+        <EntityType Name="Napravleniya">
+          <Key>
+            <PropertyRef Name="IdNapravleniya" />
+          </Key>
+          <Property Name="IdNapravleniya" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Polsovateli" Relationship="Self.FK_Polsovateli_Napravleniya" FromRole="Napravleniya" ToRole="Polsovateli" />
+        </EntityType>
+        <EntityType Name="Pol">
+          <Key>
+            <PropertyRef Name="IdPola" />
+          </Key>
+          <Property Name="IdPola" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Polsovateli" Relationship="Self.FK_Polsovateli_Pol" FromRole="Pol" ToRole="Polsovateli" />
+        </EntityType>
+        <EntityType Name="Polsovateli">
+          <Key>
+            <PropertyRef Name="IdPolzovatelya" />
+          </Key>
+          <Property Name="IdPolzovatelya" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Familiya" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Imya" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Otchestvo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="DataRojdeniya" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdPola" Type="Int32" Nullable="false" />
+          <Property Name="IdStrani" Type="Int32" Nullable="false" />
+          <Property Name="IdNapravleniya" Type="Int32" />
+          <Property Name="IdMeropriyatiya" Type="Int32" />
+          <Property Name="Parol" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IdRoli" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Napravleniya" Relationship="Self.FK_Polsovateli_Napravleniya" FromRole="Polsovateli" ToRole="Napravleniya" />
+          <NavigationProperty Name="Pol" Relationship="Self.FK_Polsovateli_Pol" FromRole="Polsovateli" ToRole="Pol" />
+          <NavigationProperty Name="Roli" Relationship="Self.FK_Polsovateli_Roli" FromRole="Polsovateli" ToRole="Roli" />
+          <NavigationProperty Name="Sobitiya" Relationship="Self.FK_Polsovateli_Sobitiya" FromRole="Polsovateli" ToRole="Sobitiya" />
+          <NavigationProperty Name="Strani" Relationship="Self.FK_Polsovateli_Strani" FromRole="Polsovateli" ToRole="Strani" />
+        </EntityType>
+        <EntityType Name="Roli">
+          <Key>
+            <PropertyRef Name="IdRoli" />
+          </Key>
+          <Property Name="IdRoli" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Polsovateli" Relationship="Self.FK_Polsovateli_Roli" FromRole="Roli" ToRole="Polsovateli" />
+        </EntityType>
+        <EntityType Name="Sobitiya">
+          <Key>
+            <PropertyRef Name="IdSobitiya" />
+          </Key>
+          <Property Name="IdSobitiya" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Days" Type="Int32" Nullable="false" />
+          <Property Name="IdGoroda" Type="Int32" />
+          <NavigationProperty Name="Goroda" Relationship="Self.FK_Sobitiya_Goroda" FromRole="Sobitiya" ToRole="Goroda" />
+          <NavigationProperty Name="Polsovateli" Relationship="Self.FK_Polsovateli_Sobitiya" FromRole="Sobitiya" ToRole="Polsovateli" />
+        </EntityType>
+        <EntityType Name="Strani">
+          <Key>
+            <PropertyRef Name="IdStrani" />
+          </Key>
+          <Property Name="IdStrani" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Polsovateli" Relationship="Self.FK_Polsovateli_Strani" FromRole="Strani" ToRole="Polsovateli" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Sobitiya_Goroda">
+          <End Role="Goroda" Type="Self.Goroda" Multiplicity="0..1" />
+          <End Role="Sobitiya" Type="Self.Sobitiya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goroda">
+              <PropertyRef Name="IdGoroda" />
+            </Principal>
+            <Dependent Role="Sobitiya">
+              <PropertyRef Name="IdGoroda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polsovateli_Napravleniya">
+          <End Role="Napravleniya" Type="Self.Napravleniya" Multiplicity="0..1" />
+          <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Napravleniya">
+              <PropertyRef Name="IdNapravleniya" />
+            </Principal>
+            <Dependent Role="Polsovateli">
+              <PropertyRef Name="IdNapravleniya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polsovateli_Pol">
+          <End Role="Pol" Type="Self.Pol" Multiplicity="1" />
+          <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pol">
+              <PropertyRef Name="IdPola" />
+            </Principal>
+            <Dependent Role="Polsovateli">
+              <PropertyRef Name="IdPola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polsovateli_Roli">
+          <End Role="Roli" Type="Self.Roli" Multiplicity="1" />
+          <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roli">
+              <PropertyRef Name="IdRoli" />
+            </Principal>
+            <Dependent Role="Polsovateli">
+              <PropertyRef Name="IdRoli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polsovateli_Sobitiya">
+          <End Role="Sobitiya" Type="Self.Sobitiya" Multiplicity="0..1" />
+          <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sobitiya">
+              <PropertyRef Name="IdSobitiya" />
+            </Principal>
+            <Dependent Role="Polsovateli">
+              <PropertyRef Name="IdMeropriyatiya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polsovateli_Strani">
+          <End Role="Strani" Type="Self.Strani" Multiplicity="1" />
+          <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Strani">
+              <PropertyRef Name="IdStrani" />
+            </Principal>
+            <Dependent Role="Polsovateli">
+              <PropertyRef Name="IdStrani" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Goroda" EntityType="Self.Goroda" />
+          <EntitySet Name="Napravleniya" EntityType="Self.Napravleniya" />
+          <EntitySet Name="Pol" EntityType="Self.Pol" />
+          <EntitySet Name="Polsovateli" EntityType="Self.Polsovateli" />
+          <EntitySet Name="Roli" EntityType="Self.Roli" />
+          <EntitySet Name="Sobitiya" EntityType="Self.Sobitiya" />
+          <EntitySet Name="Strani" EntityType="Self.Strani" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Sobitiya_Goroda" Association="Self.FK_Sobitiya_Goroda">
+            <End Role="Goroda" EntitySet="Goroda" />
+            <End Role="Sobitiya" EntitySet="Sobitiya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polsovateli_Napravleniya" Association="Self.FK_Polsovateli_Napravleniya">
+            <End Role="Napravleniya" EntitySet="Napravleniya" />
+            <End Role="Polsovateli" EntitySet="Polsovateli" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polsovateli_Pol" Association="Self.FK_Polsovateli_Pol">
+            <End Role="Pol" EntitySet="Pol" />
+            <End Role="Polsovateli" EntitySet="Polsovateli" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polsovateli_Roli" Association="Self.FK_Polsovateli_Roli">
+            <End Role="Roli" EntitySet="Roli" />
+            <End Role="Polsovateli" EntitySet="Polsovateli" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polsovateli_Sobitiya" Association="Self.FK_Polsovateli_Sobitiya">
+            <End Role="Sobitiya" EntitySet="Sobitiya" />
+            <End Role="Polsovateli" EntitySet="Polsovateli" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polsovateli_Strani" Association="Self.FK_Polsovateli_Strani">
+            <End Role="Strani" EntitySet="Strani" />
+            <End Role="Polsovateli" EntitySet="Polsovateli" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище testDEModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Goroda">
+            <EntityTypeMapping TypeName="testDEModel.Goroda">
+              <MappingFragment StoreEntitySet="Goroda">
+                <ScalarProperty Name="IdGoroda" ColumnName="IdGoroda" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Napravleniya">
+            <EntityTypeMapping TypeName="testDEModel.Napravleniya">
+              <MappingFragment StoreEntitySet="Napravleniya">
+                <ScalarProperty Name="IdNapravleniya" ColumnName="IdNapravleniya" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pol">
+            <EntityTypeMapping TypeName="testDEModel.Pol">
+              <MappingFragment StoreEntitySet="Pol">
+                <ScalarProperty Name="IdPola" ColumnName="IdPola" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Polsovateli">
+            <EntityTypeMapping TypeName="testDEModel.Polsovateli">
+              <MappingFragment StoreEntitySet="Polsovateli">
+                <ScalarProperty Name="IdPolzovatelya" ColumnName="IdPolzovatelya" />
+                <ScalarProperty Name="Familiya" ColumnName="Familiya" />
+                <ScalarProperty Name="Imya" ColumnName="Imya" />
+                <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="DataRojdeniya" ColumnName="DataRojdeniya" />
+                <ScalarProperty Name="IdPola" ColumnName="IdPola" />
+                <ScalarProperty Name="IdStrani" ColumnName="IdStrani" />
+                <ScalarProperty Name="IdNapravleniya" ColumnName="IdNapravleniya" />
+                <ScalarProperty Name="IdMeropriyatiya" ColumnName="IdMeropriyatiya" />
+                <ScalarProperty Name="Parol" ColumnName="Parol" />
+                <ScalarProperty Name="IdRoli" ColumnName="IdRoli" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roli">
+            <EntityTypeMapping TypeName="testDEModel.Roli">
+              <MappingFragment StoreEntitySet="Roli">
+                <ScalarProperty Name="IdRoli" ColumnName="IdRoli" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sobitiya">
+            <EntityTypeMapping TypeName="testDEModel.Sobitiya">
+              <MappingFragment StoreEntitySet="Sobitiya">
+                <ScalarProperty Name="IdSobitiya" ColumnName="IdSobitiya" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Days" ColumnName="Days" />
+                <ScalarProperty Name="IdGoroda" ColumnName="IdGoroda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Strani">
+            <EntityTypeMapping TypeName="testDEModel.Strani">
+              <MappingFragment StoreEntitySet="Strani">
+                <ScalarProperty Name="IdStrani" ColumnName="IdStrani" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="testDEModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

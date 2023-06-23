@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище testDEModelContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Goroda">
+      <EntityTypeMapping TypeName="testDEModel.Goroda">
+        <MappingFragment StoreEntitySet="Goroda">
+          <ScalarProperty Name="IdGoroda" ColumnName="IdGoroda" />
+          <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Napravleniya">
+      <EntityTypeMapping TypeName="testDEModel.Napravleniya">
+        <MappingFragment StoreEntitySet="Napravleniya">
+          <ScalarProperty Name="IdNapravleniya" ColumnName="IdNapravleniya" />
+          <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pol">
+      <EntityTypeMapping TypeName="testDEModel.Pol">
+        <MappingFragment StoreEntitySet="Pol">
+          <ScalarProperty Name="IdPola" ColumnName="IdPola" />
+          <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Polsovateli">
+      <EntityTypeMapping TypeName="testDEModel.Polsovateli">
+        <MappingFragment StoreEntitySet="Polsovateli">
+          <ScalarProperty Name="IdPolzovatelya" ColumnName="IdPolzovatelya" />
+          <ScalarProperty Name="Familiya" ColumnName="Familiya" />
+          <ScalarProperty Name="Imya" ColumnName="Imya" />
+          <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="DataRojdeniya" ColumnName="DataRojdeniya" />
+          <ScalarProperty Name="IdPola" ColumnName="IdPola" />
+          <ScalarProperty Name="IdStrani" ColumnName="IdStrani" />
+          <ScalarProperty Name="IdNapravleniya" ColumnName="IdNapravleniya" />
+          <ScalarProperty Name="IdMeropriyatiya" ColumnName="IdMeropriyatiya" />
+          <ScalarProperty Name="Parol" ColumnName="Parol" />
+          <ScalarProperty Name="IdRoli" ColumnName="IdRoli" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roli">
+      <EntityTypeMapping TypeName="testDEModel.Roli">
+        <MappingFragment StoreEntitySet="Roli">
+          <ScalarProperty Name="IdRoli" ColumnName="IdRoli" />
+          <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sobitiya">
+      <EntityTypeMapping TypeName="testDEModel.Sobitiya">
+        <MappingFragment StoreEntitySet="Sobitiya">
+          <ScalarProperty Name="IdSobitiya" ColumnName="IdSobitiya" />
+          <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Days" ColumnName="Days" />
+          <ScalarProperty Name="IdGoroda" ColumnName="IdGoroda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Strani">
+      <EntityTypeMapping TypeName="testDEModel.Strani">
+        <MappingFragment StoreEntitySet="Strani">
+          <ScalarProperty Name="IdStrani" ColumnName="IdStrani" />
+          <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="testDEModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

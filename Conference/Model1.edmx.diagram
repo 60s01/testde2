@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f4895ec358b04b7d8cf57ac6dbe49d6a" Name="Diagram1">
+        <EntityTypeShape EntityType="testDEModel.Goroda" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="testDEModel.Napravleniya" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="testDEModel.Pol" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="testDEModel.Polsovateli" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="testDEModel.Roli" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="testDEModel.Sobitiya" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="testDEModel.Strani" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="testDEModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="testDEModel.FK_Sobitiya_Goroda" ManuallyRouted="false" />
+        <AssociationConnector Association="testDEModel.FK_Polsovateli_Napravleniya" ManuallyRouted="false" />
+        <AssociationConnector Association="testDEModel.FK_Polsovateli_Pol" ManuallyRouted="false" />
+        <AssociationConnector Association="testDEModel.FK_Polsovateli_Roli" ManuallyRouted="false" />
+        <AssociationConnector Association="testDEModel.FK_Polsovateli_Sobitiya" ManuallyRouted="false" />
+        <AssociationConnector Association="testDEModel.FK_Polsovateli_Strani" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище testDEModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Goroda">
+    <Key>
+      <PropertyRef Name="IdGoroda" />
+    </Key>
+    <Property Name="IdGoroda" Type="int" Nullable="false" />
+    <Property Name="Nazvanie" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Napravleniya">
+    <Key>
+      <PropertyRef Name="IdNapravleniya" />
+    </Key>
+    <Property Name="IdNapravleniya" Type="int" Nullable="false" />
+    <Property Name="Nazvanie" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pol">
+    <Key>
+      <PropertyRef Name="IdPola" />
+    </Key>
+    <Property Name="IdPola" Type="int" Nullable="false" />
+    <Property Name="Nazvanie" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Polsovateli">
+    <Key>
+      <PropertyRef Name="IdPolzovatelya" />
+    </Key>
+    <Property Name="IdPolzovatelya" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Familiya" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Imya" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Otchestvo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefon" Type="nchar" MaxLength="11" Nullable="false" />
+    <Property Name="DataRojdeniya" Type="date" Nullable="false" />
+    <Property Name="IdPola" Type="int" Nullable="false" />
+    <Property Name="IdStrani" Type="int" Nullable="false" />
+    <Property Name="IdNapravleniya" Type="int" />
+    <Property Name="IdMeropriyatiya" Type="int" />
+    <Property Name="Parol" Type="nchar" MaxLength="11" Nullable="false" />
+    <Property Name="IdRoli" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roli">
+    <Key>
+      <PropertyRef Name="IdRoli" />
+    </Key>
+    <Property Name="IdRoli" Type="int" Nullable="false" />
+    <Property Name="Nazvanie" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sobitiya">
+    <Key>
+      <PropertyRef Name="IdSobitiya" />
+    </Key>
+    <Property Name="IdSobitiya" Type="int" Nullable="false" />
+    <Property Name="Nazvanie" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Data" Type="date" Nullable="false" />
+    <Property Name="Days" Type="int" Nullable="false" />
+    <Property Name="IdGoroda" Type="int" />
+  </EntityType>
+  <EntityType Name="Strani">
+    <Key>
+      <PropertyRef Name="IdStrani" />
+    </Key>
+    <Property Name="IdStrani" Type="int" Nullable="false" />
+    <Property Name="Nazvanie" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Polsovateli_Napravleniya">
+    <End Role="Napravleniya" Type="Self.Napravleniya" Multiplicity="0..1" />
+    <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Napravleniya">
+        <PropertyRef Name="IdNapravleniya" />
+      </Principal>
+      <Dependent Role="Polsovateli">
+        <PropertyRef Name="IdNapravleniya" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Polsovateli_Pol">
+    <End Role="Pol" Type="Self.Pol" Multiplicity="1" />
+    <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pol">
+        <PropertyRef Name="IdPola" />
+      </Principal>
+      <Dependent Role="Polsovateli">
+        <PropertyRef Name="IdPola" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Polsovateli_Roli">
+    <End Role="Roli" Type="Self.Roli" Multiplicity="1" />
+    <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roli">
+        <PropertyRef Name="IdRoli" />
+      </Principal>
+      <Dependent Role="Polsovateli">
+        <PropertyRef Name="IdRoli" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Polsovateli_Sobitiya">
+    <End Role="Sobitiya" Type="Self.Sobitiya" Multiplicity="0..1" />
+    <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sobitiya">
+        <PropertyRef Name="IdSobitiya" />
+      </Principal>
+      <Dependent Role="Polsovateli">
+        <PropertyRef Name="IdMeropriyatiya" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Polsovateli_Strani">
+    <End Role="Strani" Type="Self.Strani" Multiplicity="1" />
+    <End Role="Polsovateli" Type="Self.Polsovateli" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Strani">
+        <PropertyRef Name="IdStrani" />
+      </Principal>
+      <Dependent Role="Polsovateli">
+        <PropertyRef Name="IdStrani" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sobitiya_Goroda">
+    <End Role="Goroda" Type="Self.Goroda" Multiplicity="0..1" />
+    <End Role="Sobitiya" Type="Self.Sobitiya" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Goroda">
+        <PropertyRef Name="IdGoroda" />
+      </Principal>
+      <Dependent Role="Sobitiya">
+        <PropertyRef Name="IdGoroda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище testDEModelContainer">
+    <EntitySet Name="Goroda" EntityType="Self.Goroda" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Napravleniya" EntityType="Self.Napravleniya" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pol" EntityType="Self.Pol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Polsovateli" EntityType="Self.Polsovateli" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roli" EntityType="Self.Roli" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sobitiya" EntityType="Self.Sobitiya" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Strani" EntityType="Self.Strani" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Polsovateli_Napravleniya" Association="Self.FK_Polsovateli_Napravleniya">
+      <End Role="Napravleniya" EntitySet="Napravleniya" />
+      <End Role="Polsovateli" EntitySet="Polsovateli" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Polsovateli_Pol" Association="Self.FK_Polsovateli_Pol">
+      <End Role="Pol" EntitySet="Pol" />
+      <End Role="Polsovateli" EntitySet="Polsovateli" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Polsovateli_Roli" Association="Self.FK_Polsovateli_Roli">
+      <End Role="Roli" EntitySet="Roli" />
+      <End Role="Polsovateli" EntitySet="Polsovateli" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Polsovateli_Sobitiya" Association="Self.FK_Polsovateli_Sobitiya">
+      <End Role="Sobitiya" EntitySet="Sobitiya" />
+      <End Role="Polsovateli" EntitySet="Polsovateli" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Polsovateli_Strani" Association="Self.FK_Polsovateli_Strani">
+      <End Role="Strani" EntitySet="Strani" />
+      <End Role="Polsovateli" EntitySet="Polsovateli" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sobitiya_Goroda" Association="Self.FK_Sobitiya_Goroda">
+      <End Role="Goroda" EntitySet="Goroda" />
+      <End Role="Sobitiya" EntitySet="Sobitiya" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
